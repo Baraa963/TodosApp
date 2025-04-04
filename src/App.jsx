@@ -1,15 +1,13 @@
-
-import './App.css'
+import { Typography } from "@mui/material";
+import "./App.css";
+import TodosApp from "./Components/TodosApp/TodosApp";
 
 function App() {
-
   return (
     <>
-      <p className="read-the-docs">
-        Click ooon the Vite and React logos to learn more
-      </p>
+      <TodosApp />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
