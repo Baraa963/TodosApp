@@ -11,14 +11,13 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Todo from "../Todo/Todo";
 import { v4 as uuidv4 } from "uuid";
-
-const initialTodos = [];
+import { TodosContext } from "../../Contexts/TodosContext";
 
 export default function TodoList() {
-  const [todos, setTodos] = useState(initialTodos);
+  const { todos, setTodos } = useContext(TodosContext);
   const [alignment, setAlignment] = useState("جميع المهام");
   const [newTodoTitle, setNewTodoTitle] = useState("");
   const [newTodoDesc, setNewTodoDesc] = useState("");
@@ -42,15 +41,6 @@ export default function TodoList() {
     setNewTodoDesc("");
   }
 
-  function handleCheck(todoId) {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === todoId) {
-        return { ...todo, status: !todo.status };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  }
 
   const filteredTodos =
     alignment === "الغير منجزة"
@@ -68,7 +58,7 @@ export default function TodoList() {
     );
   } else {
     todosData = filteredTodos.map((todo) => (
-      <Todo key={todo.id} todo={todo} handleCheck={handleCheck} />
+      <Todo key={todo.id} todo={todo}/>
     ));
   }
 

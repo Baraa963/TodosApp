@@ -6,9 +6,17 @@ import { Box, IconButton, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Check, EditNote } from "@mui/icons-material";
 
-export default function Todo({todo,handleCheck}) {
+import { TodosContext } from "../../Contexts/TodosContext";
+export default function Todo({todo}) {
+  const { todos, setTodos } = React.useContext(TodosContext);
   function handleCheckTodoStatus(){
-    handleCheck(todo.id);
+    const updatedTodos = todos.map((t) => {
+      if (t.id === todo.id) {
+        return { ...t, status: !t.status };
+      }
+      return t;
+    });
+    setTodos(updatedTodos);
   }
   return (
     <Stack>
